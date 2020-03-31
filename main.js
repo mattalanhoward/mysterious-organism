@@ -36,34 +36,70 @@ const pAequorFactory = (specNum, dnaArr) => {
                 newbase = returnRandBase();
               } while (newbase === this.dna[randomInx]);
               return this.dna[randomInx] = newbase;
-},
+          },
         compareDNA(obj) {
           let baseCounter = 0;
           let percentSame = 0;
-          for(let i = 0; i<15; i ++) {
+          for(let i = 0; i<this.dna.length; i ++) {
             if (this.dna[i] === obj[i]) {
               baseCounter ++;
             }
           }
           percentSame = ((baseCounter/15) * 100).toFixed(2);
           return `The two DNA strands have ${percentSame}% DNA in common.`;
-         },
+          },
+          willLikelySurvive() {
+              //returns true if this.dna contains at least 60% 'C' or 'G' otherwise returns false. 
+              let cCounter = 0;
+              let gCounter = 0;
+              let percentCG = 0;
+              let totalCG = 0;
+              let survive = true;
+
+              for(i = 0; i < this.dna.length; i++){
+                  if(this.dna[i] == 'C')
+                      cCounter++;
+              }
+              for(j = 0; j < this.dna.length; j++){
+                if(this.dna[j] == 'G')
+                    gCounter++;
+            }
+              totalCG = (cCounter + gCounter);
+              percentCG = ((totalCG/15) * 100).toFixed(2);
+              console.log(percentCG + '%')
+              
+              if (percentCG >= 60) {
+                survive = true;
+              } else {
+                survive = false;
+              }
+              return survive;
+            },
         
       }
   
   };   
-  
 
-//run tests.  
-let test = pAequorFactory(1, mockUpStrand());
-console.log(test.specimenNum);
-console.log(test.dna);
-console.log(test.compareDNA([
-  'A', 'C', 'G', 'T',
-  'G', 'A', 'C', 'A',
-  'G', 'G', 'A', 'T',
-  'T', 'C', 'A'
-]))
+  const organismArr = [];
+do {
+  const specimen = pAequorFactory(counter.incrementCounter(),mockUpStrand())
+  organismArr.push(specimen.dna);
+} while (organismArr.length < 30)
+
+console.log(organismArr)
+// run tests.  
+// let test = pAequorFactory(1, mockUpStrand());
+// console.log(test.specimenNum);
+// console.log(test.dna);
+// console.log(test.compareDNA([
+//   'A', 'C', 'G', 'T',
+//   'G', 'A', 'C', 'A',
+//   'G', 'G', 'A', 'T',
+//   'T', 'C', 'A'
+// ]))
+// console.log(test.willLikelySurvive())
+
+
 
 
 
