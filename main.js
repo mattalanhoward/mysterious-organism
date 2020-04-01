@@ -75,20 +75,50 @@ const pAequorFactory = (specNum, dnaArr) => {
               }
               return survive;
             },
-        
+            complimentStrand() {
+              const compliment = [];
+              for(i = 0;i <= this.dna.length; i ++){
+              switch (this.dna[i]) {
+                case 'A':
+                  compliment.push('T');
+                  break;
+
+                  case 'T':
+                    compliment.push('A');
+                    break;
+
+                    case 'C':
+                  compliment.push('G');
+                  break;
+
+                  case 'G':
+                  compliment.push('C');
+                  break;
+            }
+          }
+          return compliment;
       }
+    }
   
   };   
 
+  //Create an Array of 30 possible DNA strands that will survive in the wild. 
   const organismArr = [];
 do {
   const specimen = pAequorFactory(counter.incrementCounter(),mockUpStrand())
   organismArr.push(specimen.dna);
 } while (organismArr.length < 30)
-
 console.log(organismArr)
+
+
+//Create complimentary DNA
+let complimentTest = pAequorFactory(1,mockUpStrand());
+// console.log (complimentTest.dna);
+// console.log(complimentTest.complimentStrand());
+
+
 // run tests.  
-// let test = pAequorFactory(1, mockUpStrand());
+let test = pAequorFactory(1, mockUpStrand());
 // console.log(test.specimenNum);
 // console.log(test.dna);
 // console.log(test.compareDNA([
@@ -97,6 +127,7 @@ console.log(organismArr)
 //   'G', 'G', 'A', 'T',
 //   'T', 'C', 'A'
 // ]))
+
 // console.log(test.willLikelySurvive())
 
 
